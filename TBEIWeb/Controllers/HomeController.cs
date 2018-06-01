@@ -20,6 +20,7 @@ namespace TBEIWeb.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -27,11 +28,24 @@ namespace TBEIWeb.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            return Redirect("http://www.tbei.com/contact");
+        }
 
+        [Authorize]
+        public ActionResult ShopSite(string siteName)
+        {
+            ViewData["ShopName"] = siteName;
             return View();
         }
+
+        [Authorize]
+        public ActionResult Redirecter(string URL)
+        {
+            return Redirect(URL);
+        }
+
     }
 }

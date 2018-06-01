@@ -1,0 +1,69 @@
+﻿@Styles.Render("~/Styles/Spinner.css")
+@Scripts.Render("~/Scripts/Spinner.js")
+
+@model TBEIWeb.Controllers.LoginController.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*Store the referring Url to a session variable*@
+@{Session["ShopName"] = Request.Url;}
+
+@Session["ShopName"]
+
+@*Parse the Request.Url to get the Shop name.*@
+@{
+    if (Session["ShopName"].ToString().Contains("Fayette")) { Session["ShopName"] = "Fayette"; }
+    if (Session["ShopName"].ToString().Contains("Houston")) { Session["ShopName"] = "Houston"; }
+    if (Session["ShopName"].ToString().Contains("Lake%2520Crystal")) { Session["ShopName"] = "Lake Crystal"; }
+    if (Session["ShopName"].ToString().Contains("Rugby")) { Session["ShopName"] = "Rugby"; }
+    if (Session["ShopName"].ToString().Contains("Tishomingo")) { Session["ShopName"] = "Tishomingo"; }
+    if (Session["ShopName"].ToString().Contains("tbei-dwl")) { Session["ShopName"] = "TBEIConfigurator"; }
+}
+
+<div class="row">
+    <div class="col" style="padding-left:250px">
+        <img src="~/Images/tbei.jpg" height="50" width="169" /><p />
+    </div>
+    <div class="col-lg-12">
+        <section id="loginForm">
+            @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="btnSubmit" value="Log in" class="btn btn-default" />
+            </div>
+        </div>
+
+        @*This DIV displays the waiting spinner during login.*@
+        <div class="spinner" style="display:none">
+            <div class="center-div">
+                <div class="inner-div">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </div>
+}
+
+        </section>
+    </div>
+</div>
+

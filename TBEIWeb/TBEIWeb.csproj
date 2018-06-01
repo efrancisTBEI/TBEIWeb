@@ -121,10 +121,12 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -180,6 +182,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\AdAuthenticationService.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -187,13 +190,39 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ShopSiteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Nests_Get_Result.cs">
+      <DependentUpon>ProNest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Nest_Tester_Result.cs">
+      <DependentUpon>ProNest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Parts_Get_Result.cs">
+      <DependentUpon>ProNest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProNest.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProNest.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProNest.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProNest.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProNest.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProNest.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="wcf\IOlapClientService.cs" />
@@ -222,6 +251,7 @@
     <Compile Include="WebAPI\RelationalGridController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\ajaxspinner.gif" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\ej\web\bootstrap-theme\ej.theme.min.css" />
@@ -486,10 +516,28 @@
     <Content Include="Content\ej\web\responsive-css\ej.responsive.css" />
     <Content Include="Content\ej\web\responsive-css\ejgrid.responsive.css" />
     <Content Include="Content\ej\web\ribbon-css\ej.icons.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Crysteel_Logo.png" />
+    <Content Include="Images\Duraclass_Logo_4C.png" />
+    <Content Include="Images\Federal-Signal.jpg" />
+    <Content Include="Images\HR.jpeg" />
+    <Content Include="Images\OX_Bodies_Logo.png" />
+    <Content Include="Images\rugby-mfg-logo.png" />
+    <Content Include="Images\tbei.jpg" />
+    <Content Include="Images\Toolbox.jpeg" />
+    <Content Include="Images\Travis_Logo.jpg" />
+    <Content Include="Models\ProNest.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProNest.edmx</DependentUpon>
+      <LastGenOutput>ProNest.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProNest.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProNest.edmx</DependentUpon>
+      <LastGenOutput>ProNest.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\ej\web\bootstrap-theme\ej.theme.less" />
@@ -531,6 +579,14 @@
     <Content Include="Content\ej\web\office-365\icons\ejicons.eot" />
     <Content Include="Content\ej\web\office-365\icons\ejicons.ttf" />
     <Content Include="Content\ej\web\office-365\icons\ejicons.woff" />
+    <Content Include="favicon.ico" />
+    <EntityDeploy Include="Models\ProNest.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProNest.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ProNest.edmx.diagram">
+      <DependentUpon>ProNest.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ej\ej.globalize.min.js" />
@@ -553,11 +609,16 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Spinner.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Styles\Spinner.css" />
+    <Content Include="Styles\StyleSheet.css" />
     <Content Include="wcf\OlapClientService.svc" />
     <Content Include="wcf\RelationalClientService.svc" />
     <Content Include="wcf\RelationalGridService.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -595,8 +656,15 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\ShopSite\ShopSite.cshtml" />
+    <Content Include="Views\ShopSite\ProNest.cshtml" />
+    <Content Include="Views\Home\Redirecter.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutFullScreen.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

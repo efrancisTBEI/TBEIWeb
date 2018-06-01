@@ -15,6 +15,14 @@ namespace TBEIWeb
 {
     public partial class Startup
     {
+        // Inspiration for Active Directory authentication derived from here:
+        // https://tech.trailmax.info/2016/03/using-owin-and-active-directory-to-authenticate-users-in-asp-net-mvc-5-application/
+
+        public static class TBEIAuthentication
+        {
+            public const string ApplicationCookie = "TBEIAuthenticationType";
+        }
+
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -26,9 +34,14 @@ namespace TBEIWeb
             // Enable the application to use a cookie to store information for the signed in user
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login")
+                AuthenticationType = TBEIAuthentication.ApplicationCookie,
+                LoginPath = new PathString("/Login/Index"),
+                Provider = new CookieAuthenticationProvider(),
+                CookieName = "TBEICookie",
+                CookieHttpOnly = true,
+                ExpireTimeSpan = System.TimeSpan.FromHours(12),
             });
+            
             // Use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 

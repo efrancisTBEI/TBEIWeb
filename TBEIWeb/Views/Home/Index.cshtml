@@ -1,33 +1,85 @@
+@Styles.Render("~/Styles/StyleSheet.css")
 @{
     ViewBag.Title = "Home Page";
+    Session["ShopName"] = "";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+<div id="result"></div>
+<img id="spinner" src="../content/ajaxspinner.gif" style="display: none;">
+
+<div class="row" style="padding-left:15px">
+    <h2>
+        <img src="~/Images/tbei.jpg" height="50" width="169" />
+        Shop Websites
+    </h2>
+
+    @*Navigation buttons for each facility (Button Title/View/Controller/Site Name Parameter)*@
+    @Html.ActionLink("Fayette", "ShopSite", "ShopSite", new { siteName = "Fayette" }, new { @class = "btn btn-primary custom" })
+    @Html.ActionLink("Houston", "ShopSite", "ShopSite", new { siteName = "Houston" }, new { @class = "btn btn-primary custom" })
+    @Html.ActionLink("Lake Crystal", "ShopSite", "ShopSite", new { siteName = "Lake Crystal" }, new { @class = "btn btn-primary custom" })
+    @Html.ActionLink("Rugby", "ShopSite", "ShopSite", new { siteName = "Rugby" }, new { @class = "btn btn-primary custom" })
+    @Html.ActionLink("Tishomingo", "ShopSite", "ShopSite", new { siteName = "Tishomingo" }, new { @class = "btn btn-primary custom" })
 </div>
 
-     
+<div class="row" style="padding-left:15px;">
+    <hr />
+    <h2>
+        <img src="~/Images/Federal-Signal.jpg" height="55" width="200" />
+        Corporate Websites
+    </h2>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+    @*Navigation buttons row #1 for the various corporate websites.*@
+    <a href="http://www.federalsignal.com" target="_blank" class="btn btn-primary custom">Federal Signal</a>
+    <a href="http://www.tbei.com" target="_blank" class="btn btn-primary custom">TBEI</a>
+    <a href="http://www.tbeidumpbodyparts.com" target="_blank" class="btn btn-primary custom">TBEI Dump Body Parts</a>
+    <a href="http://www.crysteel.com" target="_blank" class="btn btn-primary custom">Crysteel</a>
+    <a href="http://www.duraclass.com" target="_blank" class="btn btn-primary custom">Duraclass</a>
 </div>
+
+@*Navigation buttons row #2 for the various corporate websites.*@
+<div class="row" style="padding-left:15px;padding-top:10px" ;>
+    <a href="http://www.j-craftinc.com" target="_blank" class="btn btn-primary custom">J-Craft</a>
+    <a href="http://www.oxbodies.com" target="_blank" class="btn btn-primary custom">OX Bodies</a>
+    <a href="http://www.rugbymfg.com" target="_blank" class="btn btn-primary custom">Rugby</a>
+    <a href="http://www.travistrailers.com" target="_blank" class="btn btn-primary custom">Travis Trailers</a>
+</div>
+
+@*Navigation buttons row #1 for Quality/Engineering/Sales Tools. sites.*@
+<div class="row" style="padding-left:15px;">
+    <hr />
+    <h2>
+        <img src="~/Images/Toolbox.jpeg" height="80" width="120" />
+        Engineering / Quality / Sales
+    </h2>
+    <a href="http://www01/ItemNumberAssigner/" target="_blank" class="btn btn-primary custom">Item Number Assigner</a>
+    <a href="http://www01/Drawings/?strFileType=PDF" target="_blank" class="btn btn-primary custom">Drawing Retrieval</a>
+    <a href="http://tbeiweb/ECN/" target="_blank" class="btn btn-primary custom">Engineering Changes</a>
+    <a href="http://www01/CAPA/" target="_blank" class="btn btn-primary custom">TBEI CAPA Website</a>
+</div>
+
+@*Navigation buttons row #2 for Quality/Engineering/Sales Tools. sites.*@
+<div class="row" style="padding-left:15px;padding-top:10px">
+    @Html.ActionLink("TBEI Configurator", "Redirecter", "Home", new { URL = "http://tbei-dwl:8080/Login" }, new { @class = "btn btn-primary custom" })
+    <a href="http://tbei-dwl:8080/Login" target="_blank" class="btn btn-primary custom">TBEI Configurator</a>
+    <a href="http://www01/DuraclassConfig/" target="_blank" class="btn btn-primary custom">Duraclass Body Configurator</a>
+</div>
+
+@*Navigation buttons row #1 for misc. sites.*@
+<div class="row" style="padding-left:15px;">
+    <hr />
+    <h2>
+        <img src="~/Images/HR.jpeg" height="80" width="120" />
+        Employee Links
+    </h2>
+    <a href="https://www.infinityhr.com/Login.aspx" target="_blank" class="btn btn-primary custom">Infinity HR</a>
+    <a href="http://www01/ActiveDirectoryList/" target="_blank" class="btn btn-primary custom">TBEI User Directory</a>
+    <a href="https://mail.tbei.com/owa" target="_blank" class="btn btn-primary custom">TBEI Email Web Interface</a>
+    <a href="http://vitalworklife.com/" target="_blank" class="btn btn-primary custom">Employee Assistance Program</a>
+</div>
+
+@*Navigation buttons row #2 for misc. sites.*@
+<div class="row" style="padding-left:15px;padding-top:10px">
+    <a href="https://www.bluecrossmn.com/healthy/public/personal/home/" target="_blank" class="btn btn-primary custom">Blue Cross Blue Shield</a>
+    <hr />
+</div>
+

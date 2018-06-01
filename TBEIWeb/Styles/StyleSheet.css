@@ -1,0 +1,21 @@
+﻿.custom
+{
+    width: auto;
+    margin-right: 7px;
+    text-align: left;
+}
+
+br
+{
+    padding-top:5px;
+    line-height: 150%;
+}
+
+hr {
+    height:1px;
+    padding-left:0;
+    padding-bottom:0;
+    border:none;
+    color:#333;
+    background-color:#333;
+}

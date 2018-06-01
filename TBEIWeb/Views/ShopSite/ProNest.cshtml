@@ -1,0 +1,30 @@
+﻿@Styles.Render("~/Styles/StyleSheet.css")
+@model TBEIWeb.Models.Nest_Tester_Result
+@{
+    ViewBag.Title = "ProNest";
+}
+
+<div class="container-fluid body-content" style="width:98%">
+
+<div class="row">
+    <div class="col-lg-12">
+        @*The location name is passed as ViewData["ShopName"].*@
+        <h2>@Html.Encode(ViewData["ShopName"]) Shop Page - Nests</h2>
+
+        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-primary" })<br />
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+
+        @(Html.EJ().Grid<object>("FlatGrid")
+                            .Datasource(ds => ds.Json((IEnumerable<object>)ViewBag.datasource))
+                            .AllowPaging()
+                            .AllowResizeToFit()
+        )
+
+    </div>
+</div>
+</div>

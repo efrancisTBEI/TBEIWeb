@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PronestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="Nest_Tester" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Nests_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NestID" Type="int" Mode="In" />
+          <Parameter Name="MachineName" Type="nvarchar" Mode="In" />
+          <Parameter Name="rgid" Type="nvarchar" Mode="In" />
+          <Parameter Name="CNCFile" Type="nvarchar" Mode="In" />
+          <Parameter Name="incomplete" Type="bit" Mode="In" />
+          <Parameter Name="ProgID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Parts_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PartName" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="PronestModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PronestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PronestEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="Nest_Tester" ReturnType="Collection(PronestModel.Nest_Tester_Result)" />
+          <FunctionImport Name="Nests_Get" ReturnType="Collection(PronestModel.Nests_Get_Result)">
+            <Parameter Name="NestID" Mode="In" Type="Int32" />
+            <Parameter Name="MachineName" Mode="In" Type="String" />
+            <Parameter Name="rgid" Mode="In" Type="String" />
+            <Parameter Name="CNCFile" Mode="In" Type="String" />
+            <Parameter Name="incomplete" Mode="In" Type="Boolean" />
+            <Parameter Name="ProgID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Parts_Get" ReturnType="Collection(PronestModel.Parts_Get_Result)">
+            <Parameter Name="PartName" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Nest_Tester_Result">
+          <Property Type="Int32" Name="RecNum" Nullable="false" />
+          <Property Type="Int32" Name="NestID" Nullable="false" />
+          <Property Type="String" Name="CNCFile" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Nest" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Machine" Nullable="true" />
+          <Property Type="Int32" Name="Qty" Nullable="true" />
+          <Property Type="DateTime" Name="DueDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="MaterialID" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PlateName" Nullable="true" MaxLength="40" />
+          <Property Type="Double" Name="Thickness" Nullable="true" />
+          <Property Type="Double" Name="PlateLength" Nullable="true" />
+          <Property Type="Double" Name="PlateWidth" Nullable="true" />
+          <Property Type="DateTime" Name="CaptureDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="RecordDate" Nullable="true" Precision="23" />
+          <Property Type="Int16" Name="Active" Nullable="true" />
+          <Property Type="String" Name="Comments" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="JobName" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="TrackedNestID" Nullable="true" />
+          <Property Type="Int32" Name="ProgramID" Nullable="true" />
+          <Property Type="Int32" Name="ProgID" Nullable="true" />
+          <Property Type="Int32" Name="UpDtd" Nullable="true" />
+          <Property Type="Int32" Name="InControl" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Nests_Get_Result">
+          <Property Type="String" Name="Display_Name" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="NestID" Nullable="true" />
+          <Property Type="Int32" Name="TrackedNestID" Nullable="true" />
+          <Property Type="String" Name="Material" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="MaterialDescription" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="PlateName" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="PlateDescription" Nullable="true" MaxLength="40" />
+          <Property Type="Double" Name="PlateLength" Nullable="true" />
+          <Property Type="Double" Name="PlateWidth" Nullable="true" />
+          <Property Type="Int32" Name="CutNumTimes" Nullable="true" />
+          <Property Type="Int32" Name="QuantityComplete" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="RGID" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="JobFile" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="JobFileName" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="CNCFile" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="DueDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Remnant" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="ProgID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Parts_Get_Result">
+          <Property Type="String" Name="PartName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Revision" Nullable="true" MaxLength="20" />
+          <Property Type="Double" Name="InitialRotation" Nullable="true" />
+          <Property Type="Double" Name="GrainRestraint" Nullable="true" />
+          <Property Type="Int16" Name="Mirror" Nullable="true" />
+          <Property Type="Int16" Name="Cluster" Nullable="true" />
+          <Property Type="Int16" Name="CommonLine" Nullable="true" />
+          <Property Type="String" Name="strDrawingPath" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="PPI" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PronestModelStoreContainer" CdmEntityContainer="PronestEntities" >
+          <FunctionImportMapping FunctionImportName="Nest_Tester" FunctionName="PronestModel.Store.Nest_Tester">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PronestModel.Nest_Tester_Result">
+                <ScalarProperty Name="RecNum" ColumnName="RecNum" />
+                <ScalarProperty Name="NestID" ColumnName="NestID" />
+                <ScalarProperty Name="CNCFile" ColumnName="CNCFile" />
+                <ScalarProperty Name="Nest" ColumnName="Nest" />
+                <ScalarProperty Name="Machine" ColumnName="Machine" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+                <ScalarProperty Name="PlateName" ColumnName="PlateName" />
+                <ScalarProperty Name="Thickness" ColumnName="Thickness" />
+                <ScalarProperty Name="PlateLength" ColumnName="PlateLength" />
+                <ScalarProperty Name="PlateWidth" ColumnName="PlateWidth" />
+                <ScalarProperty Name="CaptureDate" ColumnName="CaptureDate" />
+                <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="JobName" ColumnName="JobName" />
+                <ScalarProperty Name="TrackedNestID" ColumnName="TrackedNestID" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="ProgID" ColumnName="ProgID" />
+                <ScalarProperty Name="UpDtd" ColumnName="UpDtd" />
+                <ScalarProperty Name="InControl" ColumnName="InControl" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Nests_Get" FunctionName="PronestModel.Store.Nests_Get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PronestModel.Nests_Get_Result">
+                <ScalarProperty Name="Display_Name" ColumnName="Display_Name" />
+                <ScalarProperty Name="NestID" ColumnName="NestID" />
+                <ScalarProperty Name="TrackedNestID" ColumnName="TrackedNestID" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="MaterialDescription" ColumnName="MaterialDescription" />
+                <ScalarProperty Name="PlateName" ColumnName="PlateName" />
+                <ScalarProperty Name="PlateDescription" ColumnName="PlateDescription" />
+                <ScalarProperty Name="PlateLength" ColumnName="PlateLength" />
+                <ScalarProperty Name="PlateWidth" ColumnName="PlateWidth" />
+                <ScalarProperty Name="CutNumTimes" ColumnName="CutNumTimes" />
+                <ScalarProperty Name="QuantityComplete" ColumnName="QuantityComplete" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RGID" ColumnName="RGID" />
+                <ScalarProperty Name="JobFile" ColumnName="JobFile" />
+                <ScalarProperty Name="JobFileName" ColumnName="JobFileName" />
+                <ScalarProperty Name="CNCFile" ColumnName="CNCFile" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="Remnant" ColumnName="Remnant" />
+                <ScalarProperty Name="ProgID" ColumnName="ProgID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Parts_Get" FunctionName="PronestModel.Store.Parts_Get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PronestModel.Parts_Get_Result">
+                <ScalarProperty Name="PartName" ColumnName="PartName" />
+                <ScalarProperty Name="Revision" ColumnName="Revision" />
+                <ScalarProperty Name="InitialRotation" ColumnName="InitialRotation" />
+                <ScalarProperty Name="GrainRestraint" ColumnName="GrainRestraint" />
+                <ScalarProperty Name="Mirror" ColumnName="Mirror" />
+                <ScalarProperty Name="Cluster" ColumnName="Cluster" />
+                <ScalarProperty Name="CommonLine" ColumnName="CommonLine" />
+                <ScalarProperty Name="strDrawingPath" ColumnName="strDrawingPath" />
+                <ScalarProperty Name="PPI" ColumnName="PPI" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

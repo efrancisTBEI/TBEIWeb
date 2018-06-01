@@ -1,0 +1,231 @@
+﻿@Styles.Render("~/Styles/Spinner.css")
+@Scripts.Render("~/Scripts/Spinner.js")
+
+@Styles.Render("~/Styles/StyleSheet.css")
+@{
+    ViewBag.Title = @Html.Encode(ViewData["ShopName" + " Shop Page"]);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ if (Session["ShopName"].ToString() == "") { Session["ShopName"] = ViewData["ShopName"]; } }
+
+<div class="row" style="padding-left:15px">
+    @*The location name is passed as ViewData["ShopName"].*@
+    <h2>@Html.Encode(ViewData["ShopName"]) Shop Page - Main Menu</h2>
+
+    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-primary" })
+
+    @*Display menu choices based on the "ShopName" value passed.*@
+    @{
+        switch (Session["ShopName"].ToString())
+        {
+            case "Lake Crystal":
+                <img src="~/Images/Crysteel_Logo.png" height="38" width="200" style="padding-left:5px;padding-top:5px" />
+                break;
+            case "Houston":
+                <img src="~/Images/Travis_Logo.jpg" height="55" width="250" style="padding-left:5px;padding-top:5px" />
+                break;
+            case "Fayette":
+                <img src="~/Images/OX_Bodies_Logo.png" height="80" width="200" style="padding-left:5px;padding-top:5px" />
+                break;
+            case "Rugby":
+                <img src="~/Images/rugby-mfg-logo.png" height="55" width="200" style="padding-left:5px;padding-top:5px" />
+                break;
+            case "Tishomingo":
+                <img src="~/Images/Duraclass_Logo_4C.png" height="80" width="200" style="padding-left:5px;padding-top:5px" />
+                break;
+            case "TBEIConfigurator":
+                Response.Redirect(Url.Action("Redirecter", "Home", new { URL = "http://tbei-dwl:8080/Login" }), false);
+                break;
+            default:
+                Response.Redirect(Url.Action("Index", "Home"), false);
+                break;
+        }
+    }
+
+    <hr />
+</div>
+
+<div class="row">
+    @*Display menu options based on which site was chosen.*@
+    <div class="col-lg-12">
+        @{
+            // Display menu choices based on the "ShopName" value passed.
+            switch (Session["ShopName"].ToString())
+            {
+                case "Fayette":
+                    // Fayette Menu Buttons Row #1
+                    <div class="row" style="padding-left:15px">
+                        <a href="http://www01/Shop_FYAL/Job/" class="btn btn-primary custom">Jobs</a>
+                        <a href="http://www01/Shop_FYAL/Plan/" class="btn btn-primary custom">Planned JIT</a>
+                        <a href="http://www01/Shop_FYAL/WorkCenterMaterialIssue.aspx" class="btn btn-primary custom">Work Center Material Issue</a>
+                        <a href="http://tbeiweb/ShopFloor/default.aspx" class="btn btn-primary custom">New Shop Floor Page</a>
+                        <a href="http://www01/Shop_FYAL/Pronest/" class="btn btn-primary custom">ProNest</a>
+                        <a href="http://www01/Shop_FYAL/Pronest/AddNestOrder.aspx" class="btn btn-primary custom">ProNest Order Form</a>
+                    </div>
+
+                    // Fayette Menu Buttons Row #2
+                    <div class="row" style="padding-left:15px;padding-top:10px">
+                        <a href="http://www01/Shop_FYAL/Item/" class="btn btn-primary custom">Item Lookup</a>
+                        <a href="http://www01/Shop_FYAL/Plan/Add.aspx" class="btn btn-primary custom">Planned JIT Order Form</a>
+                        <a href="http://www01/TimeClock/?Branch=FYAL" target="_blank" class="btn btn-primary custom">Time Clock</a>
+                        <a href="https://msdsmanagement.msdsonline.com/968467c6-7579-4a4d-ab83-192c4c963733/ebinder/?nas=True" class="btn btn-primary custom">Safety Data Sheets</a>
+                        <a href="http://www01/Shop_FYAL/MaintenanceRequest.aspx" class="btn btn-primary custom">Maintenance Request</a>
+                        <a href="http://www01/ITProblemLog/View.aspx" class="btn btn-primary custom">IT Service Request</a>
+                    </div>
+
+                    // Fayette Menu Buttons Row #3
+                    <div class="row" style="padding-left:15px;padding-top:10px">
+                        <a href="http://www01/Shop_FYAL/SuggestionBox/" class="btn btn-primary custom">Suggestion Form</a>
+                        <a href="http://www01/Shop_FYAL/COPQ.aspx" class="btn btn-primary custom">COPQ Web Page</a>
+                        @Html.ActionLink("Test ProNest", "ProNest", "ShopSite", new { siteName = "Fayette" }, new { @class = "btn btn-primary custom" })
+                    </div>
+
+                    @*This DIV displays the waiting spinner during login.*@
+                    <div class="spinner" style="display:none">
+                        <div class="center-div">
+                            <div class="inner-div">
+                                <div class="loader"></div>
+                            </div>
+                        </div>
+                    </div>
+                    break;
+
+                case "Houston":
+                    // Houston Menu Buttons Row #1
+                    <div class="row" style="padding-left:15px">
+                        <a href="http://www01/Shop_HSTX/Job/" class="btn btn-primary custom">Jobs</a>
+                        <a href="http://www01/Shop_HSTX/Plan/" class="btn btn-primary custom">Planned JIT</a>
+                        <a href="http://www01/Shop_HSTX/WorkCenterMaterialIssue.aspx" class="btn btn-primary custom">Work Center Material Issue</a>
+                        <a href="http://www01/Shop_HSTX/Item/" class="btn btn-primary custom">Item Lookup</a>
+                    </div>
+
+                    // Houston Menu Buttons Row #2
+                    <div class="row" style="padding-left:15px;padding-top:10px">
+                        <a href="http://www01/TimeClock/?Branch=HSTX" target="_blank" class="btn btn-primary custom">Time Clock</a>
+                        <a href="https://msdsmanagement.msdsonline.com/968467c6-7579-4a4d-ab83-192c4c963733/ebinder/?nas=True" class="btn btn-primary custom">Safety Data Sheets</a>
+                        <a href="http://www01/ITProblemLog/View.aspx" class="btn btn-primary custom">IT Service Request</a>
+                        <a href="http://www01/Shop_HSTX/MaintenanceRequest.aspx" class="btn btn-primary custom">Maintenance Request</a>
+                    </div>
+
+                    break;
+
+                case "Lake Crystal":
+                    // Lake Crystal Menu Buttons Row #1
+                    <div class="row" style="padding-left:15px">
+                        <a href="http://www01/Shop_LCMN/Job/" class="btn btn-primary custom">Jobs</a>
+                        <a href="http://www01/Shop_LCMN/Plan/" class="btn btn-primary custom">Planned JIT</a>
+                        <a href="http://www01/Shop_LCMN/WorkCenterMaterialIssue.aspx" class="btn btn-primary custom">Work Center Material Issue</a>
+                        <a href="http://www01/Shop_LCMN/Item/" class="btn btn-primary custom">Item Lookup</a>
+                        <a href="http://tbeiweb/ShopFloor/default.aspx" class="btn btn-primary custom">New Shop Floor Page</a>
+                        <a href="http://tbeiweb/shoptools/addplan.aspx" class="btn btn-primary custom">Planned JIT Order Form</a>
+                    </div>
+
+                    // Lake Crystal Menu Buttons Row #2
+                    <div class="row" style="padding-top:10px;padding-left:15px">
+                        <a href="http://www01/Shop_LCMN/Pronest/" class="btn btn-primary custom">ProNest</a>
+                        <a href="http://www01/Shop_LCMN/Trunest/" class="btn btn-primary custom">TruNest</a>
+                        <a href="http://www01/Shop_LCMN/LCQuality/" class="btn btn-primary custom">Inspection</a>
+                        <a href="http://www01/TimeClock/?Branch=LCMN" target="_blank" class="btn btn-primary custom">Time Clock</a>
+                        <a href="http://www01/LCMN/Quality/" target="_blank" class="btn btn-primary custom">Quality Documents</a>
+                        <a href="http://www01/LCMN/HR/" target="_blank" class="btn btn-primary custom">Human Resources</a>
+                        <a href="http://www01/LCMN/Safety/" target="_blank" class="btn btn-primary custom">Safety</a>
+                    </div>
+
+                    // Lake Crystal Menu Buttons Row #3
+                    <div class="row" style="padding-top:10px;padding-left:15px">
+                        <a href="https://msdsmanagement.msdsonline.com/968467c6-7579-4a4d-ab83-192c4c963733/ebinder/?nas=True" class="btn btn-primary custom">Safety Data Sheets</a>
+                        <a href="http://www01/Shop_LCMN/MaintenanceRequest.aspx" class="btn btn-primary custom">Maintenance Request</a>
+                        <a href="http://www01/ITProblemLog/View.aspx" class="btn btn-primary custom">IT Service Request</a>
+                        <a href="http://www01/Shop_LCMN/EC.aspx" class="btn btn-primary custom">Engineering Change Request</a>
+                        <a href="http://www01/Shop_LCMN/SuggestionBox/" class="btn btn-primary custom">Suggestion Box</a>
+                    </div>
+
+                    break;
+
+                case "Rugby":
+                    // Rugby Menu Buttons Row #1
+                    <div class="row" style="padding-left:15px">
+                        <a href="http://www01/Shop_RGND/Job/" class="btn btn-primary custom">Jobs</a>
+                        <a href="http://www01/Shop_RGND/Plan/" class="btn btn-primary custom">Planned JIT</a>
+                        <a href="http://www01/Shop_RGND/WorkCenterMaterialIssue.aspx" class="btn btn-primary custom">Work Center Material Issue</a>
+                        <a href="http://www01/Shop_RGND/Item/" class="btn btn-primary custom">Item Lookup</a>
+                        <a href="http://tbeiweb/ShopFloor/default.aspx" class="btn btn-primary custom">New Shop Floor Page</a>
+                    </div>
+
+                    // Rugby Menu Buttons Row #2
+                    <div class="row" style="padding-top:10px;padding-left:15px">
+                        <a href="http://www01/Shop_RGND/Pronest/" class="btn btn-primary custom">ProNest</a>
+                        <a href="http://www01/Shop_RGND/Pronest/AddNestOrder.aspx" class="btn btn-primary custom">ProNest Order Form</a>
+                        <a href="http://www01/Shop_RGND/Plan/Add.aspx" class="btn btn-primary custom">Planned JIT Order Form</a>
+                        <a href="http://www01/TimeClock/?Branch=RGND" class="btn btn-primary custom">Time Clock</a>
+                        <a href="http://www01/RGND/Quality/?path=/Level%203%20Documents%20(Work%20Instructions%20and%20Forms)/Work%20Instructions" class="btn btn-primary custom">Work Instructions</a>
+                    </div>
+
+                    // Rugby Menu Buttons Row #3
+                    <div class="row" style="padding-top:10px;padding-left:15px">
+                        <a href="http://www01/RGND/Quality/" target="_blank" class="btn btn-primary custom">Quality Documents</a>
+                        <a href="http://www01/RGND/Safety/" target="_blank" class="btn btn-primary custom">Safety Data Sheets</a>
+                        <a href="http://www01/RGND/HR/" target="_blank" class="btn btn-primary custom">Human Resources</a>
+                        <a href="http://www01/RGND/Engineering/Reference%20Documents/" target="_blank" class="btn btn-primary custom">Reference Documents</a>
+                        <a href="http://www01/RGND/Engineering/ECR%20and%20ECN/" target="_blank" class="btn btn-primary custom">ECR and ECN</a>
+                    </div>
+
+                    // Rugby Menu Buttons Row #4
+                    <div class="row" style="padding-top:10px;padding-left:15px">
+                        <a href="http://www01/Shop_RGND/MaintenanceRequest.aspx" target="_blank" class="btn btn-primary custom">Maintenance Request</a>
+                        <a href="http://www01/ITProblemLog/View.aspx" target="_blank" class="btn btn-primary custom">IT Service Request</a>
+                        <a href="http://www01/Shop_RGND/SuggestionBox/" target="_blank" class="btn btn-primary custom">Suggestion Box</a>
+                        <a href="http://www01/Shop_RGND/COPQ.aspx" target="_blank" class="btn btn-primary custom">COPQ Website</a>
+                    </div>
+
+                    break;
+
+                case "Tishomingo":
+                    // Tishomingo Menu Buttons Row #1
+                    <div class="row" style="padding-left:15px">
+                        <a href="http://www01/Shop_TSMS/Job/" class="btn btn-primary custom">Jobs</a>
+                        <a href="http://www01/Shop_TSMS/Plan/" class="btn btn-primary custom">Planned JIT</a>
+                        <a href="http://www01/Shop_TSMS/WorkCenterMaterialIssue.aspx" class="btn btn-primary custom">Work Center Material Issue</a>
+                        <a href="http://www01/Shop_TSMS/Item/" class="btn btn-primary custom">Item Lookup</a>
+                        <a href="http://tbeiweb/ShopFloor/default.aspx" class="btn btn-primary custom">New Shop Floor Page</a>
+                    </div>
+
+                    // Tishomingo Menu Buttons Row #2
+                    <div class="row" style="padding-top:10px;padding-left:15px">
+                        <a href="http://www01/Shop_TSMS/Pronest/" class="btn btn-primary custom">ProNest</a>
+                        <a href="http://www01/Shop_TSMS/Pronest/AddNestOrder.aspx" class="btn btn-primary custom">ProNest Order Form</a>
+                        <a href="http://www01/Shop_TSMS/Trunest/" class="btn btn-primary custom">TruNest</a>
+                        <a href="http://www01/Shop_TSMS/Plan/Add.aspx" class="btn btn-primary custom">Planned JIT Order Form</a>
+                        <a href="http://www01/Shop_TSMS/Barcode/" class="btn btn-primary custom">Barcode Tags</a>
+                    </div>
+
+                    // Tishomingo Menu Buttons Row #3
+                    <div class="row" style="padding-top:10px;padding-left:15px">
+                        <a href="http://www01/TimeClock/?Branch=TSMS" class="btn btn-primary custom">Time Clock</a>
+                        <a href="https://msdsmanagement.msdsonline.com/968467c6-7579-4a4d-ab83-192c4c963733/ebinder/?nas=True" class="btn btn-primary custom">Safety Data Sheets</a>
+                        <a href="http://www01/Shop_HSTX/MaintenanceRequest.aspx" class="btn btn-primary custom">Maintenance Request</a>
+                        <a href="http://www01/ITProblemLog/View.aspx" class="btn btn-primary custom">IT Service Request</a>
+                        <a href="http://www01/Shop_TSMS/SuggestionBox/" class="btn btn-primary custom">Suggestion Box</a>
+                        <a href="http://www01/Shop_TSMS/COPQ.aspx/" class="btn btn-primary custom">COPQ Web Page</a>
+
+                    </div>
+                    break;
+
+
+                default:
+                    break;
+
+            }
+        }
+        <hr />
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
