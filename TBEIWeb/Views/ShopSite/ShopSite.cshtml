@@ -46,7 +46,7 @@
     <hr />
 </div>
 
-<div class="row">
+<div class="row" id="btnSubmit">
     @*Display menu options based on which site was chosen.*@
     <div class="col-lg-12">
         @{
@@ -68,7 +68,7 @@
                     <div class="row" style="padding-left:15px;padding-top:10px">
                         <a href="http://www01/Shop_FYAL/Item/" class="btn btn-primary custom">Item Lookup</a>
                         <a href="http://www01/Shop_FYAL/Plan/Add.aspx" class="btn btn-primary custom">Planned JIT Order Form</a>
-                        <a href="http://www01/TimeClock/?Branch=FYAL" target="_blank" class="btn btn-primary custom">Time Clock</a>
+                        <a href="http://www01/TimeClock/?Branch=FYAL" id="" class="btn btn-primary custom">Time Clock</a>
                         <a href="https://msdsmanagement.msdsonline.com/968467c6-7579-4a4d-ab83-192c4c963733/ebinder/?nas=True" class="btn btn-primary custom">Safety Data Sheets</a>
                         <a href="http://www01/Shop_FYAL/MaintenanceRequest.aspx" class="btn btn-primary custom">Maintenance Request</a>
                         <a href="http://www01/ITProblemLog/View.aspx" class="btn btn-primary custom">IT Service Request</a>
@@ -78,16 +78,6 @@
                     <div class="row" style="padding-left:15px;padding-top:10px">
                         <a href="http://www01/Shop_FYAL/SuggestionBox/" class="btn btn-primary custom">Suggestion Form</a>
                         <a href="http://www01/Shop_FYAL/COPQ.aspx" class="btn btn-primary custom">COPQ Web Page</a>
-                        @Html.ActionLink("Test ProNest", "ProNest", "ShopSite", new { siteName = "Fayette" }, new { @class = "btn btn-primary custom" })
-                    </div>
-
-                    @*This DIV displays the waiting spinner during login.*@
-                    <div class="spinner" style="display:none">
-                        <div class="center-div">
-                            <div class="inner-div">
-                                <div class="loader"></div>
-                            </div>
-                        </div>
                     </div>
                     break;
 
@@ -222,10 +212,19 @@
     </div>
 </div>
 
+@*This DIV displays the waiting spinner during login.*@
+<div class="spinner" style="display:none">
+    <div class="center-div">
+        <div class="inner-div">
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
 
 

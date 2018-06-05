@@ -18,7 +18,7 @@
     background-color: Black;
     filter: alpha(opacity=60);
     opacity: 0.6;
-    -moz-opacity: 0.8;
+    /*moz-opacity: 0.8;*/
 }
 
 .loader {
@@ -39,24 +39,25 @@
     margin: auto;
     padding: 2%;
     width: 150px;
+
 }
 
     @-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
 
-    100% {
-        -webkit-transform: rotate(360deg);
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
     }
-}
 
     @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
+        0% {
+            transform: rotate(0deg);
+        }
 
-    100% {
-        transform: rotate(360deg);
+        100% {
+            transform: rotate(360deg);
+        }
     }
-}
